@@ -42,7 +42,6 @@ namespace WTG_94239
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
