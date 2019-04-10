@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace WTG_94239
 {
@@ -20,6 +21,16 @@ namespace WTG_94239
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Session 持续的时间
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                // Session 只能Http
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -39,7 +50,7 @@ namespace WTG_94239
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            app.UseSession();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseMvc(routes =>
@@ -59,6 +70,7 @@ namespace WTG_94239
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }
