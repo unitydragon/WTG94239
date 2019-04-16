@@ -25,11 +25,13 @@ namespace WTG_94239
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
+                // 改变其预设名称
+                options.Cookie.Name = "BX-project";
                 // Session 持续的时间
                 options.IdleTimeout = TimeSpan.FromMinutes(10);
                 // Session 只能Http
                 options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
+               
             });
 
             // In production, the Angular files will be served from this directory
