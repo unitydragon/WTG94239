@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as signalR from '@aspnet/signalr';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Account, WebUserLogin, ChatMessage, ServerResponseMessage } from '../Commond.Model';
+import { Account, WebUserLogin,  ServerResponseMessage } from '../Commond.Model';
 
 
 
