@@ -1,5 +1,5 @@
 <header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'style="z-index:3">
     <div class="container">
       <a class="navbar-brand" [routerLink]='["/"]'>WTG_94239</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
@@ -9,7 +9,17 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
+            <div *ngIf="isLogin; then LogoutNavBar ; else LoginNavBar"></div>
+            <ng-template #LoginNavBar>
+              <a [routerLink]='["/login"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-user'></span>登入
+              </a>
+            </ng-template>
+            <ng-template #LogoutNavBar>
+            <a (click)='Logout()'>
+                <span class='glyphicon glyphicon-user'></span> 登出
+              </a>
+            </ng-template>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/counter"]'>Counter</a>

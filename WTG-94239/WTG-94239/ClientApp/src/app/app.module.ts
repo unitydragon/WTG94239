@@ -16,6 +16,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatListModule, MatGridListModule, MatTableModule, MatPaginatorModule} from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DemoMaterialModule} from './materialModel';
+
+
+
 
 
 @NgModule({
@@ -37,18 +41,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent }
     ]),
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatListModule,
-    MatGridListModule,
-    MatTableModule,
-    MatPaginatorModule,
-    FlexLayoutModule,
+    DemoMaterialModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+}
