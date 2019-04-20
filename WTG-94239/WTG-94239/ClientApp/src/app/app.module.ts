@@ -10,10 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './login/login.component';
-
 // Model
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatListModule, MatGridListModule, MatTableModule, MatPaginatorModule} from '@angular/material';
+//import { MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatListModule, MatGridListModule, MatTableModule, MatPaginatorModule} from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DemoMaterialModule} from './materialModel';
@@ -41,7 +40,9 @@ import { DemoMaterialModule} from './materialModel';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent }
     ]),
-    DemoMaterialModule
+    DemoMaterialModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
