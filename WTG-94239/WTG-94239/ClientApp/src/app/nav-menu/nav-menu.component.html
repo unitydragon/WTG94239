@@ -11,13 +11,13 @@
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
             <div *ngIf="isLogin; then LogoutNavBar ; else LoginNavBar"></div>
             <ng-template #LoginNavBar>
-              <a [routerLink]='["/login"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-user'></span>登入
+              <a class="nav-link text-dark" [routerLink]='["/login"]' (click)='collapse()'>
+                <span class='fas fa-sign-in-alt'></span>登入
               </a>
             </ng-template>
             <ng-template #LogoutNavBar>
             <a (click)='Logout()'>
-                <span class='glyphicon glyphicon-user'></span> 登出
+                <span class='fas fa-sign-in-alt'></span> 登出
               </a>
             </ng-template>
           </li>

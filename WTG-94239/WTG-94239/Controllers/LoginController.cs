@@ -67,6 +67,10 @@ namespace WTG_94239.Controllers
                         Response.Cookies.Append("User", UserJson, cookieOptions);
 
                         serverResponseMessageObj.Set("成功登入。Login Successful");
+                        
+                        //Add Seesion
+                        HttpContext.Session.SetString("Logined-UserID",account.Id.ToString());
+                        // return Html
                         return Content(serverResponseMessageObj);
 
                         // Success
@@ -97,9 +101,13 @@ namespace WTG_94239.Controllers
                 {
                     Expires = DateTime.Now.AddDays(-1)
                 };
+                //Clean Cookies
                 Response.Cookies.Delete("UserName");
                 Response.Cookies.Delete("User", cookieOptions);
                 Response.Cookies.Append("IsLogin", "false");
+
+                //Clean Session
+                HttpContext.Session.Remove("Logined-UserID");
 
                 serverResponseMessage.Content = "成功登出。";
                 serverResponseMessage.ResultCode = 0;
