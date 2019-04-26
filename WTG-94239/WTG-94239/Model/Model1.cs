@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,7 @@ namespace WTG_94239.Model.Model1
         [JsonProperty("Message")]
         public string Message { get; set; }
     }
-    public class WebUserRegist : Account
-    {
-        public string UserName { get; set; }
-    }
+   
 
 
 
@@ -40,6 +38,10 @@ namespace WTG_94239.Model.Model1
 
         public bool SetCookie30Day { get; set; } = false;
 
+    }
+    public class WebRegist :Account
+    {
+        public string EMail { get; set; }
     }
 
     public class ServerResponseMessage
@@ -69,6 +71,8 @@ namespace WTG_94239.Model.Model1
     /// </summary>
     public class WebControllerBaseExtend : ControllerBase
     {
+      
+
         /// <summary>
         /// 传ServerResponseMessage会回传json
         /// </summary>

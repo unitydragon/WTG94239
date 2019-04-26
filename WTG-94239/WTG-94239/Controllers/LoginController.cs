@@ -9,6 +9,7 @@ using WTG_94239.Model.Model1;
 using WTG_94239.Model.EF;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace WTG_94239.Controllers
 {
@@ -16,14 +17,24 @@ namespace WTG_94239.Controllers
     [ApiController]
     public class LoginController : WebControllerBaseExtend
     {
+        ServerResponseMessage serverResponseMessageObj = new ServerResponseMessage();
+
+        private readonly ILogger _logger;
+
+        public LoginController(ILogger<LoginController> logger)
+        {
+            _logger = logger;
+        }
+
+
         [HttpPost("[action]")]
         public ContentResult DefaultUserLogin([FromBody]WebUserLogin webUserLogin)
         {
             //目前只有讀取單個logindb  不需要async
-            try
-            {
 
-                ServerResponseMessage serverResponseMessageObj = new ServerResponseMessage();
+            //try
+            //{
+                
                 var Encrypt = new EncryptClass();
                 Member_DBContext loginDB = new Member_DBContext();
                 bool accountExist = false;
@@ -59,7 +70,7 @@ namespace WTG_94239.Controllers
                         }
                         //可被端存取的
                         Response.Cookies.Append("IsLogin", "true");
-                        Response.Cookies.Append("UserName", memberInfo.Name);
+                        Response.Cookies.Append("SiteUserName", account.SiteUserName);
 
 
                         //  cookieOptions.HttpOnly = true;
@@ -70,8 +81,12 @@ namespace WTG_94239.Controllers
                         
                         //Add Seesion
                         HttpContext.Session.SetString("Logined-UserID",account.Id.ToString());
-                        // return Html
-                        return Content(serverResponseMessageObj);
+                    NLog.LogManager.Configuration.Variables["userID"] = account.Id.ToString();
+                    NLog.LogManager.Configuration.Variables["userName"] = account.SiteUserName;
+                        _logger.LogDebug("使用者登入");
+                        _logger.LogDebug(HttpContext.Session.GetString("Logined-UserID"));
+                    // return Html
+                    return Content(serverResponseMessageObj);
 
                         // Success
                     }
@@ -79,15 +94,15 @@ namespace WTG_94239.Controllers
 
                 serverResponseMessageObj.Set("账号或密码错误", ServerResponseMessage.ResultCodeEnum.BadRequest);
                 return Content(serverResponseMessageObj);
-            }
+            //}
 
 
-            catch (Exception error)
-            {
-                ServerResponseMessage serverResponseMessageObj = new ServerResponseMessage();
-                serverResponseMessageObj.Set("發生了未知錯誤：" + error.Message + "。請再次確認請求 或者 通知管理员 (´･_･`)", ServerResponseMessage.ResultCodeEnum.BadRequest);
-                return Content(serverResponseMessageObj);
-            }
+            //catch (Exception error)
+            //{
+                
+            //    serverResponseMessageObj.Set("發生了未知錯誤：" + error.Message + "。請再次確認請求 或者 通知管理员 (´･_･`)", ServerResponseMessage.ResultCodeEnum.BadRequest);
+            //    return Content(serverResponseMessageObj);
+            //}
         }
 
 
@@ -96,7 +111,7 @@ namespace WTG_94239.Controllers
         {
             try
             {
-                ServerResponseMessage serverResponseMessage = new ServerResponseMessage();
+
                 CookieOptions cookieOptions = new CookieOptions
                 {
                     Expires = DateTime.Now.AddDays(-1)
@@ -107,11 +122,13 @@ namespace WTG_94239.Controllers
                 Response.Cookies.Append("IsLogin", "false");
 
                 //Clean Session
+                NLog.LogManager.Configuration.Variables["userID"] = HttpContext.Session.GetString("Logined-UserID");
+                _logger.LogDebug("使用者準備登出");
                 HttpContext.Session.Remove("Logined-UserID");
-
-                serverResponseMessage.Content = "成功登出。";
-                serverResponseMessage.ResultCode = 0;
-                return Content(serverResponseMessage);
+                _logger.LogDebug("使用者已登出");
+                serverResponseMessageObj.Content = "成功登出。";
+                serverResponseMessageObj.ResultCode = 0;
+                return Content(serverResponseMessageObj);
             }
 
             catch (Exception ex)

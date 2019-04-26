@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Newtonsoft.Json;
 namespace WTG_94239.Model.EF
 {
     public partial class Account
@@ -10,7 +10,8 @@ namespace WTG_94239.Model.EF
         public string Password { get; set; }
         public string Md5password { get; set; }
         public bool? IsBanned { get; set; }
-
-        public virtual MemberInfo IdNavigation { get; set; }
+        public string SiteUserName { get; set; }
+        [JsonIgnore]
+        public virtual MemberInfo MemberInfo { get; set; }
     }
 }

@@ -31,12 +31,10 @@ namespace WTG_94239.Model.EF
         {
             modelBuilder.Entity<Account>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.Account1 })
-                    .HasName("PRIMARY");
-
                 entity.Property(e => e.Id).HasColumnType("int(11)");
 
                 entity.Property(e => e.Account1)
+                    .IsRequired()
                     .HasColumnName("Account")
                     .HasColumnType("varchar(45)");
 
@@ -54,11 +52,9 @@ namespace WTG_94239.Model.EF
                     .IsRequired()
                     .HasColumnType("varchar(45)");
 
-                entity.HasOne(d => d.IdNavigation)
-                    .WithMany(p => p.Account)
-                    .HasForeignKey(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Account1_1Member");
+                entity.Property(e => e.SiteUserName)
+                    .IsRequired()
+                    .HasColumnType("varchar(45)");
             });
 
             modelBuilder.Entity<MemberInfo>(entity =>
@@ -70,9 +66,13 @@ namespace WTG_94239.Model.EF
                     .HasColumnName("E-mail")
                     .HasColumnType("varchar(200)");
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnType("varchar(45)");
+                entity.Property(e => e.TrueName).HasColumnType("varchar(45)");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.MemberInfo)
+                    .HasForeignKey<MemberInfo>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ID");
             });
         }
     }
