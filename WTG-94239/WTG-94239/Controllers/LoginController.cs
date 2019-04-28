@@ -9,7 +9,7 @@ using WTG_94239.Model.Model1;
 using WTG_94239.Model.EF;
 using System.Net.Http;
 using Newtonsoft.Json;
-using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace WTG_94239.Controllers
 {
@@ -17,14 +17,19 @@ namespace WTG_94239.Controllers
     [ApiController]
     public class LoginController : WebControllerBaseExtend
     {
+
         ServerResponseMessage serverResponseMessageObj = new ServerResponseMessage();
 
-        private readonly ILogger _logger;
-
+        private readonly ILogger _logger = LogManager.GetLogger("UserLog");
+        private readonly ILogger _serverLogger = LogManager.GetLogger("ServerError");
+        /*    Microsoft Log
+        private readonl ILogger logger ;
         public LoginController(ILogger<LoginController> logger)
         {
             _logger = logger;
         }
+
+        */
 
 
         [HttpPost("[action]")]
@@ -32,9 +37,10 @@ namespace WTG_94239.Controllers
         {
             //目前只有讀取單個logindb  不需要async
 
-            //try
-            //{
-                
+
+            try
+            {
+
                 var Encrypt = new EncryptClass();
                 Member_DBContext loginDB = new Member_DBContext();
                 bool accountExist = false;
@@ -81,29 +87,31 @@ namespace WTG_94239.Controllers
                         
                         //Add Seesion
                         HttpContext.Session.SetString("Logined-UserID",account.Id.ToString());
-                    NLog.LogManager.Configuration.Variables["userID"] = account.Id.ToString();
-                    NLog.LogManager.Configuration.Variables["userName"] = account.SiteUserName;
-                        _logger.LogDebug("使用者登入");
-                        _logger.LogDebug(HttpContext.Session.GetString("Logined-UserID"));
-                    // return Html
+                    
+                       NLog.LogManager.Configuration.Variables["userID"] = account.Id.ToString();
+                 //    NLog.LogManager.Configuration.Variables["userIP"] = HttpContext.Connection.RemoteIpAddress.ToString();
+                  //  NLog.LogManager.Configuration.Variables["userName"] = account.SiteUserName;
+                        _logger.Debug("使用者登入。"+"登入IP為"+HttpContext.Connection.RemoteIpAddress.ToString());
+                        // 測試用  _logger.Debug(HttpContext.Session.GetString("Logined-UserID"));
+                    
+                        // return Html
                     return Content(serverResponseMessageObj);
 
                         // Success
                     }
                 }
-
                 serverResponseMessageObj.Set("账号或密码错误", ServerResponseMessage.ResultCodeEnum.BadRequest);
                 return Content(serverResponseMessageObj);
-            //}
-
-
-            //catch (Exception error)
-            //{
-                
-            //    serverResponseMessageObj.Set("發生了未知錯誤：" + error.Message + "。請再次確認請求 或者 通知管理员 (´･_･`)", ServerResponseMessage.ResultCodeEnum.BadRequest);
-            //    return Content(serverResponseMessageObj);
-            //}
         }
+
+
+            catch (Exception ex)
+            {
+                _serverLogger.Error(ex);
+                serverResponseMessageObj.Set("發生了未知錯誤。請再次確認請求 或者 通知管理员 (´･_･`)", ServerResponseMessage.ResultCodeEnum.Error);
+                return Content(serverResponseMessageObj);
+    }
+}
 
 
         [HttpPost("[action]")]
@@ -123,9 +131,9 @@ namespace WTG_94239.Controllers
 
                 //Clean Session
                 NLog.LogManager.Configuration.Variables["userID"] = HttpContext.Session.GetString("Logined-UserID");
-                _logger.LogDebug("使用者準備登出");
+                _logger.Debug("使用者準備登出");
                 HttpContext.Session.Remove("Logined-UserID");
-                _logger.LogDebug("使用者已登出");
+                _logger.Debug("使用者已登出");
                 serverResponseMessageObj.Content = "成功登出。";
                 serverResponseMessageObj.ResultCode = 0;
                 return Content(serverResponseMessageObj);
@@ -133,7 +141,9 @@ namespace WTG_94239.Controllers
 
             catch (Exception ex)
             {
-                return Content("發生了未知錯誤：" + ex.Message + "。請再次確認請求 或者 通知管理员 (´･_･`)");
+                _serverLogger.Error(ex);
+                serverResponseMessageObj.Set("發生了未知錯誤。請再次確認請求 或者 通知管理员 (´･_･`)", ServerResponseMessage.ResultCodeEnum.Error);
+                return Content(serverResponseMessageObj);
             }
         }
 

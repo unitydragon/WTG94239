@@ -15,7 +15,7 @@ namespace WTG_94239
     {
         public static void Main(string[] args)
         {
-            NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
             CreateWebHostBuilder(args).Build().Run();
         }
 

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WTG_94239.Model.EF;
+using NLog;
 
 namespace WTG_94239.Model.Model1
 {
@@ -57,10 +57,17 @@ namespace WTG_94239.Model.Model1
 
         public string Content { get; set; } = "Something Error，发生错误。";
         public int ResultCode { get; set; } = (int)ResultCodeEnum.Error;
+
+        /// <summary>
+        /// 往前端的回傳
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="resultCode">(預設)Success : 0 | Fail = 1 | BadRequest = 2 | Error = 3</param>
         public void Set(string msg, ResultCodeEnum resultCode = ResultCodeEnum.Success)
         {
             Content = msg;
             ResultCode = (int)resultCode;
+         
         }
     }
 
@@ -85,6 +92,13 @@ namespace WTG_94239.Model.Model1
             return Content(jsonresult);
         }
 
+
+        /// <summary>
+        /// 直接丟Exception 參數
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="ErrorFunctionDesc"></param>
+        /// <returns>會回傳exception.Message</returns>
         public ContentResult ContentError(Exception exception, string ErrorFunctionDesc = "")
         {
             var obj = new ServerResponseMessage();
