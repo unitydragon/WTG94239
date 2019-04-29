@@ -2,15 +2,17 @@
   <div fxLayoutAlign="center stretch">
     <div>
       <mat-form-field>
-        <input matInput [(ngModel)]="webUserLogin.Account" placeholder="帳號" />
+        <input matInput placeholder="帳號" />
       </mat-form-field>
       <mat-form-field>
-        <input matInput [(ngModel)]="webUserLogin.Password" placeholder="密碼" />
+        <input matInput placeholder="密碼" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="信箱" />
       </mat-form-field>
     </div>
   </div>
   <div fxLayoutAlign="center stretch">
-    <mat-checkbox [(ngModel)]="webUserLogin.SetCookie30Day" ng-true-value=true ng-false-value=false>保持30日登入</mat-checkbox>
     <button mat-button (click)="LoginCheck()">登入</button>
   </div>
 </div>

@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\materialModel.ts" />
+    <None Remove="ClientApp\src\app\NgBootStrapModel.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +41,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\materialModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\NgBootStrapModel.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

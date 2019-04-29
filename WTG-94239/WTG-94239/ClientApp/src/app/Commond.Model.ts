@@ -20,6 +20,13 @@ export interface WebUserLogin {
   Password: string;
   SetCookie30Day: boolean;
 }
+export interface WebRegist {
+  Account: string;
+  Password: string;
+  SiteUserName: string;
+  Md5Password: string; //注册带空
+  Email: string;
+}
 
 export interface ChatMessage {
   UserName: string;

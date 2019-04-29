@@ -15,7 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatListModule, MatGridListModule, MatTableModule, MatPaginatorModule} from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DemoMaterialModule} from './materialModel';
+import { DemoMaterialModule } from './materialModel';
+import { DemoNgBootStraplModule } from './NgBootStrapModel';
 
 
 
@@ -41,8 +42,9 @@ import { DemoMaterialModule} from './materialModel';
       { path: 'login', component: LoginComponent }
     ]),
     DemoMaterialModule,
+    DemoNgBootStraplModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
