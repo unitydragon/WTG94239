@@ -81,7 +81,7 @@ namespace WTG_94239.Controllers
 
                         //  cookieOptions.HttpOnly = true;
                         // 使用後 前端無法讀取
-                        Response.Cookies.Append("User", UserJson, cookieOptions);
+                       Response.Cookies.Append("User", UserJson, cookieOptions);
 
                         serverResponseMessageObj.Set("成功登入。Login Successful");
                         

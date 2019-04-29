@@ -55,7 +55,7 @@ namespace WTG_94239.Controllers
                 if (regexAP.IsMatch(account.Account1) == false || regexAP.IsMatch(account.Password) == false || regexU.IsMatch(account.SiteUserName) == false || regexEmail.IsMatch(account.EMail)==false)
                 {
                     regexCheack = false;
-                    ServerResponseMessageObj.Set("請再次檢查格式，1 < UserName[中英數] <16 、 4< 帳號[英文.數字] <16 、 4< 密碼[英文.數字] <16 ");
+                    ServerResponseMessageObj.Set("請再次檢查格式，1 < UserName[中英數] <16 、 4< 帳號[英文.數字] <16 、 4< 密碼[英文.數字] <16 ，以及Email格式Example:xxx@gmail.com");
                 }
                 if (regexCheack)
                 {
