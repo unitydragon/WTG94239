@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 declare var particlesJS: any;
 @Component({

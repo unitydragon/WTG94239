@@ -10,9 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './login/login.component';
+import { RegistComponent } from './regist/regist.component';
+import { AlertMsgComponent } from './alert-msg/alert-msg.component';
 // Model
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatListModule, MatGridListModule, MatTableModule, MatPaginatorModule} from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DemoMaterialModule } from './materialModel';
@@ -29,7 +30,9 @@ import { DemoNgBootStraplModule } from './NgBootStrapModel';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoginComponent
+    LoginComponent,
+    RegistComponent,
+    AlertMsgComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,7 +42,8 @@ import { DemoNgBootStraplModule } from './NgBootStrapModel';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'regist', component: RegistComponent }
     ]),
     DemoMaterialModule,
     DemoNgBootStraplModule,

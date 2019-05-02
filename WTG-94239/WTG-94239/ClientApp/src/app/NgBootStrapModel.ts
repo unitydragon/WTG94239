@@ -1,9 +1,9 @@
-import { NgbModal,NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';\
+import { NgbModule,NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 
 @NgModule({
   exports: [
-    NgbModal,
+    NgbModule,
     NgbAlertModule,
   ]
 })

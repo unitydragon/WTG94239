@@ -76,6 +76,8 @@ export class Content {
 }
 
 
+@Injectable()
+export class NavComponetService { }
 
 
 

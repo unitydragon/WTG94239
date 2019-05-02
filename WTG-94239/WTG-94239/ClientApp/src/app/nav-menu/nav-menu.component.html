@@ -16,14 +16,16 @@
               </a>
             </ng-template>
             <ng-template #LogoutNavBar>
-            <a class="nav-link text-dark" style="cursor: pointer;" (click)='LogOut()'>
+              <a class="nav-link text-dark" style="cursor: pointer;" (click)='LogOut()'>
                 <span class='fas fa-sign-in-alt'></span> 登出
               </a>
             </ng-template>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/counter"]'>Counter</a>
-          </li>
+          <ng-template #LoginNavBar>
+            <li class="nav-item" [routerLinkActive]='["link-active"]'>
+              <a class="nav-link text-dark" [routerLink]='["/regist"]'>註冊</a>
+            </li>
+          </ng-template>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/fetch-data"]'>Fetch data</a>
           </li>
@@ -32,3 +34,4 @@
     </div>
   </nav>
 </header>
+
