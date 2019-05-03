@@ -1,0 +1,39 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-half-width {
+  width: 50%;
+}
+
+.example-panel-orange.mat-select-panel {
+  background: rgba(233, 97, 0, 0.5);
+}
+
+.example-ripple-checkbox {
+  margin: 6px 12px 6px 0;
+}
+
+.example-ripple-form-field {
+  margin: 0 6px 0 0;
+}
+
+.example-ripple-container {
+  cursor: pointer;
+  text-align: center;
+  width: 300px;
+  height: 300px;
+  line-height: 300px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}

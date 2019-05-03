@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WTG_94239.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
@@ -14,7 +14,8 @@ namespace WTG_94239.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]")]
+        //[HttpGet("[action]")]
+        [HttpGet]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();
