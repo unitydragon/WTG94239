@@ -24,8 +24,10 @@ export class KabiGridComponent {
   ])
   matcher = new MyErrorStateMatcher();
   panelColor = new FormControl('orange');
-  public rippleColor = "rgba(255, 255, 255, 0.7)";//波纹颜色
+  rippleColor = "rgba(255, 255, 255, 0.7)";//波纹颜色白
   email = '';
   account = '';
   password = '';
+  confirm = '';
+  hide = true;
 }
