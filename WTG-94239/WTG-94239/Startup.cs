@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace WTG_94239
 {
@@ -19,7 +20,22 @@ namespace WTG_94239
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //秆∕EF LOOP
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(
+                option => option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // 改变其预设名称
+                options.Cookie.Name = "BX-project";
+                // Session 持续的时间
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                // Session 只能Http
+                options.Cookie.HttpOnly = true;
+               
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -39,7 +55,7 @@ namespace WTG_94239
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            app.UseSession();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseMvc(routes =>
@@ -59,6 +75,7 @@ namespace WTG_94239
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }

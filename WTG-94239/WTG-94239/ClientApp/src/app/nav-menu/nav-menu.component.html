@@ -1,5 +1,5 @@
 <header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'style="z-index:3">
     <div class="container">
       <a class="navbar-brand" [routerLink]='["/"]'>WTG_94239</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
@@ -9,11 +9,24 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
+           
+            <ng-template [ngIf]="isLogin">
+              <a class="nav-link text-dark" [routerLink]='["/login"]' (click)='collapse()'>
+                <span class='fas fa-sign-in-alt'></span>登入
+              </a>
+            </ng-template>
+            <ng-template [ngIf]="!isLogin">
+              <a class="nav-link text-dark" style="cursor: pointer;" (click)='LogOut()'>
+                <span class='fas fa-sign-in-alt'></span> 登出
+              </a>
+            </ng-template>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/counter"]'>Counter</a>
-          </li>
+          
+          <ng-template [ngIf]="isLogin">
+            <li class="nav-item" [routerLinkActive]='["link-active"]'>
+              <a class="nav-link text-dark" [routerLink]='["/regist"]'>註冊</a>
+            </li>
+          </ng-template>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/fetch-data"]'>Fetch data</a>
           </li>
@@ -25,3 +38,4 @@
     </div>
   </nav>
 </header>
+

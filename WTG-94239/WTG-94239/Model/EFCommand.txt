@@ -1,0 +1,8 @@
+﻿Update EF #
+
+Scaffold-DbContext "Server=35.201.161.146;Database=Member_DB;uid=root;pwd=xiao-berg-project" Pomelo.EntityFrameworkCore.MySql -OutputDir Model\EF -f
+
+
+
+MYSQL FKey
+子連父  不要_當連接名稱  
