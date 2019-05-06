@@ -9,19 +9,20 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <div *ngIf="isLogin; then LogoutNavBar ; else LoginNavBar"></div>
-            <ng-template #LoginNavBar>
+           
+            <ng-template [ngIf]="isLogin">
               <a class="nav-link text-dark" [routerLink]='["/login"]' (click)='collapse()'>
                 <span class='fas fa-sign-in-alt'></span>登入
               </a>
             </ng-template>
-            <ng-template #LogoutNavBar>
+            <ng-template [ngIf]="!isLogin">
               <a class="nav-link text-dark" style="cursor: pointer;" (click)='LogOut()'>
                 <span class='fas fa-sign-in-alt'></span> 登出
               </a>
             </ng-template>
           </li>
-          <ng-template #LoginNavBar>
+          
+          <ng-template [ngIf]="isLogin">
             <li class="nav-item" [routerLinkActive]='["link-active"]'>
               <a class="nav-link text-dark" [routerLink]='["/regist"]'>註冊</a>
             </li>

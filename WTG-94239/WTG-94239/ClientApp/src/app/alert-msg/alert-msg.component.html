@@ -1,7 +1,7 @@
-<div [ngStyle]="StyleText">
-  <div style="padding-left:20%;padding-right:20%; width:100%; height:300px;">
+<div  [ngStyle]="{'display':this.display,'z-index':'100','height':'100%','width':'100%','position':'fixed'}">
+  <div style="padding-left:20%;padding-right:20%; width:100%; height:300px;position: fixed;z-index:100;">
     <ngb-alert [type]="MsgType" style="text-align:center">
-      {{alertMessage}}
+      {{alertMessage}}{{display}}
     </ngb-alert>
   </div>
 </div>

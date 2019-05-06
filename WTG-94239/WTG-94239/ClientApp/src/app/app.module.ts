@@ -43,7 +43,7 @@ import { DemoNgBootStraplModule } from './NgBootStrapModel';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'regist', component: RegistComponent }
+      { path: 'regist', component: RegistComponent },
     ]),
     DemoMaterialModule,
     DemoNgBootStraplModule,
