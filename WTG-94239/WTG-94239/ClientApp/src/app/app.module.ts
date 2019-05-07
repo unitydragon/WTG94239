@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NgbModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 // Componenet 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -18,6 +19,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DemoMaterialModule } from './materialModel';
 import { DemoNgBootStraplModule } from './NgBootStrapModel';
+//Service
+import { AlertMsgDataService } from './Commond.Model';
 
 
 
@@ -32,7 +35,7 @@ import { DemoNgBootStraplModule } from './NgBootStrapModel';
     FetchDataComponent,
     LoginComponent,
     RegistComponent,
-    AlertMsgComponent
+    AlertMsgComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -49,9 +52,12 @@ import { DemoNgBootStraplModule } from './NgBootStrapModel';
     DemoNgBootStraplModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    NgbModule.forRoot(),
+    NgbAlertModule
   ],
-  providers: [CookieService],
-  bootstrap: [AppComponent]
+  providers: [CookieService, AlertMsgDataService],
+  bootstrap: [AppComponent],
+  entryComponents: [AlertMsgComponent]
 })
 export class AppModule {
   

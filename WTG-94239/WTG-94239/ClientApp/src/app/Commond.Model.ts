@@ -1,6 +1,21 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit, Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { BehaviorSubject } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
+@Injectable()
+export class AlertMsgDataService {
+  private messageSource = new BehaviorSubject<string>('defaultMsg');
+  currencyMsg = this.messageSource.asObservable();
+  constructor() { }
+  changeMessage(message: string) {
+    this.messageSource.next(message);
+  }
+}
+
+
 
 export interface Account {
   Id: number;
@@ -74,10 +89,6 @@ export class Content {
   IsFirstContentTitle: boolean;
   HotRating: number;
 }
-
-
-@Injectable()
-export class NavComponetService { }
 
 
 

@@ -10,19 +10,18 @@
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
            
-            <ng-template [ngIf]="isLogin">
+            <ng-template [ngIf]="!isLogin">
               <a class="nav-link text-dark" [routerLink]='["/login"]' (click)='collapse()'>
                 <span class='fas fa-sign-in-alt'></span>登入
               </a>
             </ng-template>
-            <ng-template [ngIf]="!isLogin">
+            <ng-template [ngIf]="isLogin">
               <a class="nav-link text-dark" style="cursor: pointer;" (click)='LogOut()'>
                 <span class='fas fa-sign-in-alt'></span> 登出
               </a>
             </ng-template>
           </li>
-          
-          <ng-template [ngIf]="isLogin">
+          <ng-template [ngIf]="!isLogin">
             <li class="nav-item" [routerLinkActive]='["link-active"]'>
               <a class="nav-link text-dark" [routerLink]='["/regist"]'>註冊</a>
             </li>
